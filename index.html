@@ -15,9 +15,12 @@
         <form>
             <label for="user-search">Github Handle</label>
             <input type="text" name="user-search">
-            <input type="submit">
+            <button value="submit">Submit</button>
         </form>
-        <div class="results hidden"><h2>Search results</h2></div>
+        <div class="results hidden">
+            <h2 class="results__header">Search results:</h2>
+            <div class="results__list"></div>
+        </div>
     </div>
 <script
 src="https://code.jquery.com/jquery-3.3.1.min.js"

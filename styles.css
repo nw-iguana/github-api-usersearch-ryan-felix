@@ -1,24 +1,60 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+ 
+ 
 .container {
-    width: 60%;
-    min-width: 300px;
+    width: 500px;
     margin: 0 auto;
-    background-color: #8BC34A;
+    background-color: hsl(23, 97%, 50%);
     padding: 20px;
     font-family: 'Raleway', sans-serif;
-    border-radius: 20px;
     font-size: 16px;
+    color: #212121;
 }
 
 .main-header {
     margin-bottom: 20px;
 }
 
+form {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: 
+    "label label"
+    "search button";
+}
+
 form label {
     display: block;
+    grid-area: label;
 }
 
 form [name='user-search'] {
     font-size: 3rem;
+    grid-area: search;
+    width: 100%;
+    background-color: hsl(23, 97%, 80%);
+    border: none;
+    padding: 15px;
+    outline: none;
+}
+
+form button {
+    padding: 10px;
+    font-size: 2rem;
+    margin: 0;
+    grid-area: button;
+    width: 100%;
+    cursor: pointer;
+}
+
+.results__header {
+    text-decoration: underline;
 }
 
 h1,h2 {
@@ -28,7 +64,7 @@ h1,h2 {
 }
 
 body {
-    background-color: #C5E1A5;
+    background-color:#9E9E9E;
 }
 
 form {
@@ -36,24 +72,28 @@ form {
 }
 
 .results {
-    color: #E91E63;
+    color: #212121;
+    text-align: center;
+}
+
+.results__list {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.results a {
+.results__list a {
     color: inherit;
     font-size: 2rem;
     margin-top: 10px;
     text-decoration: none;
     padding: 20px;
-    border-radius: 20px;
+    box-sizing: border-box;
 }
 
-.results a:hover {
-    background-color: #880E4F;
-    color: #FCE4EC;
+.results__list a:hover {
+    color: #212121;
+    border:1px solid #212121;
 }
 
 .hidden {

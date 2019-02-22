@@ -19,11 +19,12 @@ function getRepos(url) {
     })
     .then(responseJson => {
         console.log(responseJson);
-        if(responseJson.length !== 0) {
-        renderResults(responseJson);
-        }
-        renderResults('please enter a valid user name.');
+        if(responseJson.length === 0) {
+        renderResults('Please enter a valid user name.');
         throw new Error('responseJson empty');
+
+        }
+        renderResults(responseJson);
     })
     .catch(error => console.log(error.message));
 
@@ -53,24 +54,27 @@ function createLink(innerText,url) {
 function renderResults(responseJson) {
     console.log(responseJson);
     let $results = $('.results');
+    let $resultsList = $('.results__list');
     console.log(typeof responseJson);
 
         if(typeof responseJson === 'string') {
-            $results.append(`<h1 style="color:red">${responseJson}</h1>`)
+            $resultsList.html(`<h1 style="color:#212121;background:red;">${responseJson}</h1>`)
             $results.removeClass('hidden');
             return;
         }
 
     let linksArray = responseJson.map(function getNameAndUrl(item) {
-        let $results = $('.results');
         let url = item.html_url;
         let name = item.name;
-        console.log(responseJson);
-
-        $results.append(createLink(name,url));
-        $results.removeClass('hidden');
-
+        return createLink(name,url);
     });
+
+    $resultsList.empty();
+    $resultsList.append(linksArray.join(''));
+    $results.removeClass('hidden');
+
+
+
 }
 
 //responseJson.html_url
