@@ -1,6 +1,6 @@
 function formatQuery(searchTerm) {
     const baseEndpoint = "https://api.github.com";
-    const query = `/users/sdfasdfa/repos`
+    const query = `/users/${searchTerm}/repos`
 
     return baseEndpoint + query;
 
@@ -11,17 +11,19 @@ function formatQuery(searchTerm) {
 function getRepos(url) {
     fetch(url)
     .then(response => {
+        console.log(response.ok);
         if(response.ok){
-           return response.json()
+           return response.json();
         }
-        throw new Error('something went terribly wrong!');
+        throw new Error('response was not ok');
     })
     .then(responseJson => {
-        if(responseJson.length === 0) {
-        renderResults('please enter a valid user name.');
-        throw new Error('something went terribly wrong!');
+        console.log(responseJson);
+        if(responseJson.length !== 0) {
+        renderResults(responseJson);
         }
-        renderResults(responseJson)
+        renderResults('please enter a valid user name.');
+        throw new Error('responseJson empty');
     })
     .catch(error => console.log(error.message));
 
@@ -30,7 +32,6 @@ function getRepos(url) {
 function getSearchValue() {
     let $formEl = $("[name='user-search']");
     let search = $formEl.val();
-    console.log($formEl);
     $formEl.val('');
     return search;
 }
@@ -40,7 +41,6 @@ function formHandler() {
     $('form').on('submit', function(event) {
         event.preventDefault();
         let userInput = getSearchValue();
-        console.log(userInput);
         getRepos(formatQuery(userInput));
     });
 }
@@ -53,6 +53,7 @@ function createLink(innerText,url) {
 function renderResults(responseJson) {
     console.log(responseJson);
     let $results = $('.results');
+    console.log(typeof responseJson);
 
         if(typeof responseJson === 'string') {
             $results.append(`<h1 style="color:red">${responseJson}</h1>`)
