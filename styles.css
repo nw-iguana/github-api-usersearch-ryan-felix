@@ -4,9 +4,58 @@
     margin: 0 auto;
     background-color: #8BC34A;
     padding: 20px;
-    height: 100vh;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+.main-header {
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+}
+
+form [name='user-search'] {
+    font-size: 3rem;
+}
+
+h1,h2 {
+    font-family: 'Oswald', sans-serif;
+    margin: 0;
+    font-size: 3rem;
 }
 
 body {
     background-color: #C5E1A5;
+}
+
+form {
+    font-size: 2rem;
+}
+
+.results {
+    color: #E91E63;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.results a {
+    color: inherit;
+    font-size: 2rem;
+    margin-top: 10px;
+    text-decoration: none;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.results a:hover {
+    background-color: #880E4F;
+    color: #FCE4EC;
+}
+
+.hidden {
+    display: none;
 }
